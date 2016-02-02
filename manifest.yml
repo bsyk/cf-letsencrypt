@@ -1,0 +1,9 @@
+applications:
+  - name: letsencrypt
+    buildpack: python_buildpack
+    memory: 64M
+    instances: 1
+    no-hostname: true
+    no-route: true
+    path: .
+    command: python run.py

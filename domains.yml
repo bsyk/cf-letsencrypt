@@ -1,0 +1,22 @@
+{
+  "email": "ben@example.com",
+  "staging": false,
+  "domains": [
+    {
+      "domain": "example.com",
+      "hosts": [
+        ".",
+        "auth",
+        "test",
+        "www"
+      ]
+    },
+    {
+      "domain": "example2.com",
+      "hosts": [
+        "abc",
+        "test"
+      ]
+    }
+  ]
+}
