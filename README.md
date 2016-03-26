@@ -3,7 +3,7 @@ Let's Encrypt wrapper for Cloud-Foundry
 
 Create certificates for your Cloud-Foundry-hosted apps and domains using [Let's Encrypt](https://letsencrypt.org).
 
-Using the `--path` argument of the map-route command, you can specify just a path to be directed to a separate app.
+Using the `--path` argument of the map-route command, you can specify just a path to be directed to a separate app.  The benefit, in this situation, is that you can renew your certificates with zero downtime for your apps by running the letsencrypt code in a separate instance without disrupting your application.
 
 ```
 NAME:
