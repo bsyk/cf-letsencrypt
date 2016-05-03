@@ -4,7 +4,7 @@ import time
 import threading
 import SimpleHTTPServer
 import SocketServer
-from letsencrypt import cli
+from letsencrypt import main as cli
 
 cwd = os.getcwd()
 logs = cwd+"/logs"
