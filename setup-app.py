@@ -7,7 +7,7 @@ with open('domains.yml') as data_file:
 with open('manifest.yml') as manifest_file:
     manifest = yaml.safe_load(manifest_file)
 
-print settings
+print(settings)
 appname = manifest['applications'][0]['name']
 
 # Push the app, but don't start it yet

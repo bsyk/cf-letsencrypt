@@ -18,7 +18,7 @@ port = int(os.getenv('VCAP_APP_PORT', '5000'))
 with open('domains.yml') as data_file:
     settings = yaml.safe_load(data_file)
 
-print settings
+print(settings)
 
 # Format commands
 args = ["certonly", "--non-interactive", "--text", "--debug", "--agree-tos", "--logs-dir", logs, "--work-dir", work, "--config-dir", conf, "--webroot", "-w", host]
@@ -40,7 +40,7 @@ for entry in settings['domains']:
             fqdn = host + '.' + domain
         args.append(fqdn)
 
-print "Args: ", args
+print("Args: ", args)
 
 os.chdir('host')
 
@@ -53,30 +53,30 @@ server_thread = threading.Thread(target=httpd.serve_forever)
 # Exit the server thread when the main thread terminates
 server_thread.daemon = True
 server_thread.start()
-print "Server loop listening on port ", port, ". Running in thread: ", server_thread.name
+print("Server loop listening on port ", port, ". Running in thread: ", server_thread.name)
 
-print "Starting Let's Encrypt process in 1 minute..."
+print("Starting Let's Encrypt process in 1 minute...")
 
 time.sleep(60)
 
-print "Calling letsencrypt..."
+print("Calling letsencrypt...")
 
 cli.main(args)
 
-print "Done."
-print "Fetch the certs and logs via cf files ..."
-print "You can get them with these commands: "
-print "cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/cert.pem"
-print "cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/chain.pem"
-print "cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/fullchain.pem"
-print "cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/privkey.pem"
-print
-print "REMEMBER TO STOP THE SERVER WITH cf stop letsencrypt"
+print("Done.")
+print("Fetch the certs and logs via cf files ...")
+print("You can get them with these commands: ")
+print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/cert.pem")
+print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/chain.pem")
+print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/fullchain.pem")
+print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/privkey.pem")
+print()
+print("REMEMBER TO STOP THE SERVER WITH cf stop letsencrypt")
 
 # Sleep for a week
 time.sleep(604800)
 
-print "Done.  Killing server..."
+print("Done.  Killing server...")
 
 # If we kill the server and end, the DEA should restart us and we'll try to get certificates again
 httpd.shutdown()
