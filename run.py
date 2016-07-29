@@ -70,7 +70,7 @@ print("You can get them with these commands: ")
 for entry in settings['domains']:
     for host in entry['hosts']:
         msg = ""
-        if entry['hosts'] is not None and entry['hosts'][0] != '.':
+        if entry['hosts'] is not None and host != '.':
             msg = "cf files letsencrypt app/conf/live/" + host + "." + entry['domain']
         else:
             msg = "cf files letsencrypt app/conf/live/" + entry['domain']
