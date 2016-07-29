@@ -66,11 +66,20 @@ cli.main(args)
 print("Done.")
 print("Fetch the certs and logs via cf files ...")
 print("You can get them with these commands: ")
-print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/cert.pem")
-print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/chain.pem")
-print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/fullchain.pem")
-print("cf files letsencrypt app/conf/live/" + settings['domains'][0]['domain'] + "/privkey.pem")
-print()
+
+for entry in settings['domains']:
+    for host in entry['hosts']:
+        msg = ""
+        if entry['hosts'] is not None and entry['hosts'][0] != '.':
+            msg = "cf files letsencrypt app/conf/live/" + host + "." + entry['domain']
+        else:
+            msg = "cf files letsencrypt app/conf/live/" + entry['domain']
+        print(msg + "/cert.pem")
+        print(msg + "/chain.pem")
+        print(msg + "/fullchain.pem")
+        print(msg + "/privkey.pem")
+        print()
+
 print("REMEMBER TO STOP THE SERVER WITH cf stop letsencrypt")
 
 # Sleep for a week
