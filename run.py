@@ -67,19 +67,18 @@ print("Done.")
 print("Fetch the certs and logs via cf files ...")
 print("You can get them with these commands: ")
 
-for entry in settings['domains']:
-    for host in entry['hosts']:
-        msg = ""
-        if entry['hosts'] is not None and host != '.':
-            msg = "cf files letsencrypt app/conf/live/" + host + "." + entry['domain']
-        else:
-            msg = "cf files letsencrypt app/conf/live/" + entry['domain']
-        print(msg + "/cert.pem")
-        print(msg + "/chain.pem")
-        print(msg + "/fullchain.pem")
-        print(msg + "/privkey.pem")
-        print()
+host = settings['domains'][0]['hosts'][0]
+domain = settings['domains'][0]['domain']
+path = host + "." + domain
 
+if host == '.':
+    path = domain
+
+print("cf files letsencrypt app/conf/live/" + path + "/cert.pem")
+print("cf files letsencrypt app/conf/live/" + path + "/chain.pem")
+print("cf files letsencrypt app/conf/live/" + path + "/fullchain.pem")
+print("cf files letsencrypt app/conf/live/" + path + "/privkey.pem")
+print()
 print("REMEMBER TO STOP THE SERVER WITH cf stop letsencrypt")
 
 # Sleep for a week
